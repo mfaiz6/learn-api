@@ -42,3 +42,13 @@ export const deletePackage = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+//Get all Packages
+export const getPackages = async (req, res) => {
+    try {
+        const packages = await Package.find()
+        res.status(200).json(packages)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
