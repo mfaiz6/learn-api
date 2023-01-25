@@ -32,3 +32,13 @@ export const updatePackage = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+//Delete a Package
+export const deletePackage = async (req, res) => {
+    try {
+        await Package.findByIdAndDelete(req.params.id)
+        res.status(200).json(`Package with id: ${req.params.id} deleted successfully.`)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
