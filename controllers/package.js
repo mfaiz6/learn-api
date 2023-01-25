@@ -22,3 +22,13 @@ export const getPackage = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+//Update a Package
+export const updatePackage = async (req, res) => {
+    try {
+        const updatedPackage = await Package.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true })
+        res.status(200).json(updatedPackage)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}

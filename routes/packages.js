@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPackage, getPackage } from '../controllers/package.js'
+import { createPackage, getPackage, updatePackage } from '../controllers/package.js'
 
 const router = express.Router()
 
@@ -9,5 +9,8 @@ router.post("/", createPackage)
 
 //Get a Package
 router.get("/:id", getPackage)
+
+//Update a Package
+router.put("/:id", updatePackage)
 
 export default router
