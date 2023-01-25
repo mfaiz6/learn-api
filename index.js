@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import authRoute from './routes/auth.js'
+import packagesRoute from './routes/packages.js'
 
 const app = express()
 
@@ -32,6 +33,8 @@ app.use(express.json())
 
 
 app.use("/api/auth", authRoute)
+
+app.use("/api/packages", packagesRoute)
 
 
 
