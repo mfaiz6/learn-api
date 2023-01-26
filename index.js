@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import authRoute from './routes/auth.js'
 import packagesRoute from './routes/packages.js'
 import blogsRoute from './routes/blogs.js'
+import usersRoute from './routes/users.js'
 
 const app = express()
 
@@ -35,9 +36,13 @@ app.use(express.json())
 
 app.use("/api/auth", authRoute)
 
+app.use("/api/users", usersRoute)
+
 app.use("/api/packages", packagesRoute)
 
 app.use("/api/blogs", blogsRoute)
+
+
 
 
 
