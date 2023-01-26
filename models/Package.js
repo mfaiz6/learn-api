@@ -28,6 +28,10 @@ const PackageSchema = new Schema({
     },
     benefits: {
         type: [String],
+    },
+    featured: {
+        type: Boolean,
+        default: false
     }
 })
 
