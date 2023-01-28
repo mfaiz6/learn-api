@@ -52,3 +52,20 @@ export const getPackages = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+
+//Get featured packages
+export const featuredPackages = async (req, res) => {
+    try {
+        const fPacks = await Package.aggregate([
+            {
+                $match: {
+                    "featured": true
+                }
+            }
+        ])
+        res.status(200).json(fPacks)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}

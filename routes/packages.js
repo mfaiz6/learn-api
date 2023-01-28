@@ -1,5 +1,5 @@
 import express from 'express'
-import { createPackage, deletePackage, getPackage, getPackages, updatePackage } from '../controllers/package.js'
+import { createPackage, deletePackage, featuredPackages, getPackage, getPackages, updatePackage } from '../controllers/package.js'
 
 const router = express.Router()
 
@@ -19,6 +19,9 @@ router.delete("/:id", deletePackage)
 
 //Get all Packages
 router.get("/", getPackages)
+
+//Get featured Packages
+router.get("/featured", featuredPackages)
 
 
 

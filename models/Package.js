@@ -32,6 +32,10 @@ const PackageSchema = new Schema({
     featured: {
         type: Boolean,
         default: false
+    },
+    image: {
+        type: String,
+        required: true
     }
 })
 
