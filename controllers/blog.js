@@ -50,3 +50,14 @@ export const getBlogs = async (req, res) => {
         res.status(500).json(error)
     }
 }
+
+
+//Get only 4 blogs for home page
+export const get4Blogs = async (req, res) => {
+    try {
+        const fourBlogs = await Blog.find().sort({'updatedAt': -1}).limit(4)
+        res.status(200).json(fourBlogs)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
