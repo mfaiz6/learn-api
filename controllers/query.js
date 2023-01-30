@@ -3,12 +3,7 @@ import Query from "../models/Query.js"
 
 export const saveQuery = async (req, res) => {
     try {
-        const query = new Query({
-            name: req.body.name,
-            email: req.body.email,
-            subject: req.body.subject,
-            message: req.body.message
-        })
+        const query = new Query(req.body)
         await query.save()
         res.status(200).json("Query sent success!")
     } catch (error) {

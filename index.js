@@ -52,7 +52,7 @@ app.use("/api/query", queryRoute)
 
 
 
-const PORT = 8800
+const PORT =process.env.PORT || 8800
 app.listen(PORT, () => {
     connect()
     console.log(`Server started on port ${PORT}`)
