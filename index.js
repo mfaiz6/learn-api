@@ -50,7 +50,9 @@ app.use("/api/query", queryRoute)
 
 
 
-
+app.get("/test", (req, res) => {
+    res.send("RUNNING.")
+})
 
 const PORT =process.env.PORT || 8800
 app.listen(PORT, () => {
