@@ -6,6 +6,7 @@ import packagesRoute from './routes/packages.js'
 import blogsRoute from './routes/blogs.js'
 import usersRoute from './routes/users.js'
 import newsLettersRoute from './routes/newsLetters.js'
+import queryRoute from './routes/query.js'
 
 const app = express()
 
@@ -44,6 +45,8 @@ app.use("/api/packages", packagesRoute)
 app.use("/api/blogs", blogsRoute)
 
 app.use("/api/newsLetter", newsLettersRoute)
+
+app.use("/api/query", queryRoute)
 
 
 
