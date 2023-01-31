@@ -7,6 +7,7 @@ import blogsRoute from './routes/blogs.js'
 import usersRoute from './routes/users.js'
 import newsLettersRoute from './routes/newsLetters.js'
 import queryRoute from './routes/query.js'
+import quoteQueryRoute from './routes/quoteQuery.js'
 import cors from 'cors'
 
 const app = express()
@@ -51,6 +52,8 @@ app.use("/api/blogs", blogsRoute)
 app.use("/api/newsLetter", newsLettersRoute)
 
 app.use("/api/query", queryRoute)
+
+app.use("/api/quoteQuery", quoteQueryRoute)
 
 
 
