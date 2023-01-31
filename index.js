@@ -7,8 +7,11 @@ import blogsRoute from './routes/blogs.js'
 import usersRoute from './routes/users.js'
 import newsLettersRoute from './routes/newsLetters.js'
 import queryRoute from './routes/query.js'
+import cors from 'cors'
 
 const app = express()
+
+app.use(cors())
 
 dotenv.config()
 
@@ -33,6 +36,7 @@ mongoose.connection.on("connected", () => {
 
 
 
+
 app.use(express.json())
 
 
@@ -54,7 +58,7 @@ app.get("/test", (req, res) => {
     res.send("RUNNING.")
 })
 
-const PORT =process.env.PORT || 8800
+const PORT = process.env.PORT || 8800
 app.listen(PORT, () => {
     connect()
     console.log(`Server started on port ${PORT}`)
