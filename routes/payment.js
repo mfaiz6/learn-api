@@ -10,13 +10,30 @@ const router = express.Router()
 router.post("/validatePrice", async (req, res) => {
     const productId = req.body.productId
     const finalPrice = req.body.finalPrice
+    const finalChildPrice = req.body.finalChildPrice
     const quantity = req.body.quantity
+    const childQuantity = req.body.childValue
+
     try {
         const product = await Package.findById(productId)
-        const originalPrice = product.cheapestPrice
-        if(finalPrice!==originalPrice*quantity) {
-            return res.status(400).json("Invalid Price!!!")
+        const originalAdultPrice = product.cheapestAdultPrice
+        const originalChildPrice = product.childPrice
+
+        let fullPrice
+        if (finalChildPrice <= 0) {
+            fullPrice = finalPrice
+            if (fullPrice !== originalAdultPrice * quantity) {
+                return res.status(400).json("Invalid Price!!!")
+            }
+        } else if (finalChildPrice > 0) {
+            fullPrice = finalPrice + finalChildPrice
+            if (fullPrice !== (originalAdultPrice * quantity) + (originalChildPrice * childQuantity)) {
+                return res.status(400).json("Invalid Price!!!")
+            }
         }
+        // if(finalPrice!==originalPrice*quantity) {
+        //     return res.status(400).json("Invalid Price!!!")
+        // }
         return res.status(200).json("Price validated!")
 
     } catch (error) {
@@ -33,7 +50,7 @@ router.post("/orders", async (req, res) => {
         })
 
         const options = {
-            amount: req.body.amount * 100,
+            amount: Math.round(req.body.amount * 100),
             currency: "INR",
             receipt: crypto.randomBytes(10).toString("hex")
         }
@@ -55,24 +72,24 @@ router.post("/orders", async (req, res) => {
 //payment verify
 
 router.post("/verify", async (req, res) => {
-	try {
-		const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
-			req.body;
-		const sign = razorpay_order_id + "|" + razorpay_payment_id;
-		const expectedSign = crypto
-			.createHmac("sha256", process.env.RAZORS_SECRET)
-			.update(sign.toString())
-			.digest("hex");
+    try {
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature } =
+            req.body;
+        const sign = razorpay_order_id + "|" + razorpay_payment_id;
+        const expectedSign = crypto
+            .createHmac("sha256", process.env.RAZORS_SECRET)
+            .update(sign.toString())
+            .digest("hex");
 
-		if (razorpay_signature === expectedSign) {
-			return res.status(200).json({ message: "Payment verified successfully" });
-		} else {
-			return res.status(400).json({ message: "Invalid signature sent!" });
-		}
-	} catch (error) {
-		res.status(500).json({ message: "Internal Server Error!" });
-		console.log(error);
-	}
+        if (razorpay_signature === expectedSign) {
+            return res.status(200).json({ message: "Payment verified successfully" });
+        } else {
+            return res.status(400).json({ message: "Invalid signature sent!" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error!" });
+        console.log(error);
+    }
 });
 
 

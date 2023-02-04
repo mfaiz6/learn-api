@@ -22,7 +22,11 @@ const PackageSchema = new Schema({
         type: Number,
         required: true
     },
-    cheapestPrice: {
+    cheapestAdultPrice: {
+        type: Number,
+        required: true
+    },
+    childPrice: {
         type: Number,
         required: true
     },
