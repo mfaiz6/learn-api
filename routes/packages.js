@@ -1,20 +1,21 @@
 import express from 'express'
 import { createPackage, deletePackage, featuredPackages, getPackage, getPackages, updatePackage } from '../controllers/package.js'
+import { verifyAdmin } from '../utils/verifyToken.js'
 
 const router = express.Router()
 
 
 //Create a Package
-router.post("/", createPackage)
+router.post("/", verifyAdmin, createPackage)
 
 //Get a Package
 router.get("/package/:id", getPackage)
 
 //Update a Package
-router.put("/:id", updatePackage)
+router.put("/:id", verifyAdmin, updatePackage)
 
 //Delete a Package
-router.delete("/:id", deletePackage)
+router.delete("/:id", verifyAdmin, deletePackage)
 
 
 //Get all Packages

@@ -31,9 +31,6 @@ router.post("/validatePrice", async (req, res) => {
                 return res.status(400).json("Invalid Price!!!")
             }
         }
-        // if(finalPrice!==originalPrice*quantity) {
-        //     return res.status(400).json("Invalid Price!!!")
-        // }
         return res.status(200).json("Price validated!")
 
     } catch (error) {
